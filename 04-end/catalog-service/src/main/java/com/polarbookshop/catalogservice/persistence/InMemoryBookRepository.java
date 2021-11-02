@@ -1,6 +1,5 @@
 package com.polarbookshop.catalogservice.persistence;
 
-import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -11,11 +10,12 @@ import com.polarbookshop.catalogservice.domain.BookRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class BookRepositoryImpl implements BookRepository {
+public class InMemoryBookRepository implements BookRepository {
+
 	private static final Map<String, Book> books = new ConcurrentHashMap<>();
 
 	@Override
-	public Collection<Book> findAll() {
+	public Iterable<Book> findAll() {
 		return books.values();
 	}
 
@@ -31,7 +31,7 @@ public class BookRepositoryImpl implements BookRepository {
 
 	@Override
 	public Book save(Book book) {
-		books.put(book.getIsbn(), book);
+		books.put(book.isbn(), book);
 		return book;
 	}
 
@@ -39,4 +39,5 @@ public class BookRepositoryImpl implements BookRepository {
 	public void deleteByIsbn(String isbn) {
 		books.remove(isbn);
 	}
+
 }
