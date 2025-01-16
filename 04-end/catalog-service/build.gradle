@@ -6,9 +6,12 @@ plugins {
 
 group = 'com.polarbookshop'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
-
 description = 'Provides functionality for managing the books in the catalog.'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
 
 configurations {
 	compileOnly {
